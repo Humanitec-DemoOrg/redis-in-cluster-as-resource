@@ -1,0 +1,24 @@
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: redis-commander
+
+service:
+  ports:
+    tcp:
+      port: 8081
+      targetPort: 8081
+
+containers:
+  redis-commander:
+    image: rediscommander/redis-commander
+    variables:
+      REDIS_HOST: "${resources.redis.host}"
+      REDIS_PORT: "${resources.redis.port}"
+
+resources:
+  dns: 
+    type: dns
+  redis: 
+    type: redis
+
